@@ -1,0 +1,27 @@
+show dbs
+
+dbs moviesdb
+
+show collections
+
+use movies
+
+db.movies.find({movie_name:{$eq:"Love You You"}}).pretty()
+
+db.movies.find({movie_name:{$ne:"Love You You"}}).limit(6).pretty()
+
+db.movies.find({budget:{$gte:15000}},{_id:0}).limit(4).pretty()
+
+db.movies.find({budget:{$lte:17000}},{_id:0}).limit(4).pretty()
+
+db.movies.find({$and:[{budget:{$gt:10000}},{production_year:{$gt:2000}}]},{_id:0}).limit(6).pretty()
+
+db.movies.find({$or:[{budget:{$gt:10000}},{production_year:{$gt:2000}}]},{_id:0}).limit(5).pretty()
+
+db.movies.find({$nor:[{budget:{$gt:10000}},{production_year:{$gt:2000}}]},{_id:0}).limit(5).pretty()
+
+db.movies.find({$and:[{production_year:{$gte:2000}},{production_year:{$lte:2010}}]},{_id:0}).limit(5).pretty()
+
+db.movies.find({},{_id:0}).sort({production_year:-1,movie_name:1}).limit(5).pretty()
+
+db.movies.find({},{_id:0}).sort({production_year:-1,movie_name:1}).limit(5).skip(10).pretty()
